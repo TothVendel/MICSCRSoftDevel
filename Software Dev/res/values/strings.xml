@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">yrdyt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_play">PlayActivity</string>
+    <string name="title_activity_how_to_play">HowToPlayActivity</string>
+    <string name="title_activity_puzzle1">Puzzle1Activity</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_hints">HintsActivity</string>
+    <string name="title_activity_google_map_app">GoogleMapAppActivity</string>
+    <string name="title_activity_puzzle_memory">PuzzleMemoryActivity</string>
+    <string name="title_activity_tic_tac_toe">TicTacToeActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
+
+</resources>
