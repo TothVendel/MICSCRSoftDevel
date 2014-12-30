@@ -13,6 +13,10 @@ public class NumberPointsTable extends SQLiteTable {
 	public static final String COLUMN_NAME = "name";
 	public static final String COLUMN_NUMBER = "numberpoints";
 	
+	/**
+    * NumberPoints table
+    *
+    */
 	public NumberPointsTable() {
 		super(NumberPointsTable.NAME);
 		this.addColumn(new SQLiteColumn(COLUMN_ID, "INTEGER", "PRIMARY KEY"));
