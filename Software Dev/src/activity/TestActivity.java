@@ -28,7 +28,10 @@ public class TestActivity extends Activity {
 	private TextView hint1;
 	private SQLiteNumberPointsDataSource dataSource;
 
-	
+    /**
+    * Initializes UI Fields
+    *
+    */
 	private void initUIFields() {
 		this.buttonPuzzle1 = (Button) this.findViewById(R.id.button1);
 		this.buttonPuzzle2 = (Button) this.findViewById(R.id.button5);
@@ -39,6 +42,10 @@ public class TestActivity extends Activity {
 		this.hint1 = (TextView) this.findViewById(R.id.textView2);
 	}
 	
+	/**
+    * Links navigation buttons
+    *
+    */
 	private void linkNavigationButtons() {
 		this.linkPuzzleButton();
 		this.linkPuzzle2Button();
@@ -48,6 +55,10 @@ public class TestActivity extends Activity {
 		this.linkMapButton();
 	}
 	
+	/**
+    * Links puzzle button
+    *
+    */
 	private void linkPuzzleButton() {
 		this.buttonPuzzle1.setOnClickListener(new OnClickListener() {
 
@@ -58,7 +69,11 @@ public class TestActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links puzzle2 button
+    *
+    */
 	private void linkPuzzle2Button() {
 		this.buttonPuzzle2.setOnClickListener(new OnClickListener() {
 
@@ -69,7 +84,11 @@ public class TestActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links puzzle3 button
+    *
+    */
 	private void linkPuzzle3Button() {
 		this.buttonPuzzle3.setOnClickListener(new OnClickListener() {
 
@@ -81,7 +100,16 @@ public class TestActivity extends Activity {
 		});
 	}
 
-	
+	/**
+    * Saves to database
+    *
+    * @param text
+    *      saves text
+    *
+    * @param position
+    *      saves score
+    *
+    */
 	private void saveToDatabase(String text, int position) {
 		dataSource.open();
 		dataSource.createNumberPoints(text, position);
@@ -89,7 +117,19 @@ public class TestActivity extends Activity {
 		dataSource.close();
 
 	}
-	
+	 
+	 /**
+     * On activity result
+     *
+     * @param requestCode
+     *      
+     *
+     * @param resultCode
+     *      
+     *
+     * @param data
+     *      
+     */
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 if (requestCode == PuzzleMillionaireActivity.KEY_PUZZLE0_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE1_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE2_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE3_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE4_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE5_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE6_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE7_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE8_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE9_INT) {
              if (resultCode == RESULT_OK) {
@@ -118,12 +158,21 @@ public class TestActivity extends Activity {
          
 	 }
 	
+	/**
+    * Makes toaster text
+    *
+    * @param
+    *     text to be made
+    *
+    */
 	private void makeText(String text) {
 		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 	}
 
-	 
-	 
+	/**
+    * Links show hints button
+    *
+    */
 	private void linkShowHintsButton() {
 		this.buttonShowHints.setOnClickListener(new OnClickListener() {
 
@@ -134,7 +183,11 @@ public class TestActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links map button
+    *
+    */
 	private void linkMapButton() {
 		this.buttonMap.setOnClickListener(new OnClickListener() {
 
@@ -146,7 +199,10 @@ public class TestActivity extends Activity {
 		});
 	}
 
-	
+	/**
+    * Links Show map button
+    *
+    */
 	private void linkShowMapButton() {
 		this.buttonShowMap.setOnClickListener(new OnClickListener() {
 
@@ -169,7 +225,11 @@ public class TestActivity extends Activity {
 		this.linkNavigationButtons();	
 		this.initDatabase();
 	}
-
+    
+    /**
+    * Initializes the database
+    *
+    */
 	private void initDatabase () {
 		dataSource = new SQLiteNumberPointsDataSource(this);
 	}
