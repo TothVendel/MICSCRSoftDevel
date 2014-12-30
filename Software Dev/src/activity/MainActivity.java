@@ -27,7 +27,10 @@ public class MainActivity extends Activity {
 	private Button buttonExit; 
 	private Button buttonTest; 
 	
-	
+	/**
+    * Initializes UI Fields
+    *
+    */
 	private void initUIFields() {
 		this.buttonPlay = (Button) this.findViewById(R.id.button2);
 		this.buttonHowToPlay = (Button) this.findViewById(R.id.button1);
@@ -36,6 +39,10 @@ public class MainActivity extends Activity {
 		this.buttonTest = (Button) this.findViewById(R.id.button5);
 	}
 	
+	/**
+    * Links navigation buttons
+    *
+    */
 	private void linkNavigationButtons() {
 		this.linkPlayButton();
 		this.linkHowToPlayButton();
@@ -44,6 +51,10 @@ public class MainActivity extends Activity {
 		this.linkTestButton();
 	}
 	
+	/**
+    * Links play button
+    *
+    */
 	private void linkPlayButton() {
 		this.buttonPlay.setOnClickListener(new OnClickListener() {
 
@@ -62,7 +73,11 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links test button
+    *
+    */
 	private void linkTestButton() {
 		this.buttonTest.setOnClickListener(new OnClickListener() {
 
@@ -74,7 +89,10 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	
+	/**
+    * Links how to play button
+    *
+    */
 	private void linkHowToPlayButton() {
 		this.buttonHowToPlay.setOnClickListener(new OnClickListener() {
 
@@ -86,6 +104,10 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	/**
+    * Links delete data base button 
+    *
+    */
 	private void linkDeleteDatabaseButton() {
 		this.buttonDeleteDatabase.setOnClickListener(new OnClickListener() {
 
@@ -96,7 +118,11 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links exit button 
+    *
+    */
 	private void linkExitButton() {
 		this.buttonExit.setOnClickListener(new OnClickListener() {
 
@@ -107,6 +133,10 @@ public class MainActivity extends Activity {
 		});
 	}
 	
+	/**
+    * Flushes database 
+    *
+    */
 	private void flushDatabase() {
 		SQLiteNumberPointsDataSource dataSource = new SQLiteNumberPointsDataSource(this);
 		dataSource.open();
@@ -114,7 +144,11 @@ public class MainActivity extends Activity {
 		dataSource.deleteTable(table);
 		dataSource.close();
 	}
-
+    
+    /**
+    * Empties database
+    *
+    */
 	private Boolean emptyDatabase() {
 		SQLiteNumberPointsDataSource dataSource = new SQLiteNumberPointsDataSource(this);
 		dataSource.open();
@@ -122,11 +156,16 @@ public class MainActivity extends Activity {
 		dataSource.close();
 		return elements.isEmpty();
 	}
-
+    
+    /**
+    * Makes text 
+    *
+    * @param text
+    * 	 the text to be made 
+    */
 	private void makeText(String text) {
 		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 	}
-
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
