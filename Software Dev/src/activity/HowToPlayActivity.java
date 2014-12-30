@@ -22,11 +22,19 @@ public class HowToPlayActivity extends Activity {
 		this.initUIFields();
 		this.linkNavigationButtons();
 	}
-
+    
+    /**
+    * Links navigation buttons
+    *
+    */
 	private void linkNavigationButtons() {
 		this.linkButtonPlay();
 	}
 	
+    /**
+    * Links play button
+    *
+    */
 	private void linkButtonPlay() {
 		this.buttonPlay.setOnClickListener(new OnClickListener() {
 
@@ -37,7 +45,11 @@ public class HowToPlayActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Initializes UI Fields 
+    *
+    */
 	private void initUIFields() {
 		this.buttonPlay = (Button) this.findViewById(R.id.button1);
 	}
