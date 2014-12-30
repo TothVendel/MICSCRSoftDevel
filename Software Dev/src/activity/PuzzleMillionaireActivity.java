@@ -50,7 +50,10 @@ public class PuzzleMillionaireActivity extends Activity {
 	private String[][] answers;
 	private Integer[] correctAnswers;
 	
-	
+	/**
+    * Initializes UI Fields 
+    * 
+    */
 	private void initUIFields() {
 		this.buttonA = (Button) this.findViewById(R.id.button1);
 		this.buttonB = (Button) this.findViewById(R.id.button3);
@@ -67,6 +70,10 @@ public class PuzzleMillionaireActivity extends Activity {
 
 	}
 	
+	/**
+    * Links navigation buttons 
+    * 
+    */
 	private void linkNavigationButtons() {
 		this.linkButtonA();
 		this.linkButtonB();
@@ -79,6 +86,10 @@ public class PuzzleMillionaireActivity extends Activity {
 		
 	}
 	
+    /**
+    * Links button A
+    * 
+    */
 	private void linkButtonA() {
 		this.buttonA.setOnClickListener(new OnClickListener() {
 
@@ -88,7 +99,11 @@ public class PuzzleMillionaireActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links button B 
+    * 
+    */
 	private void linkButtonB() {
 		this.buttonB.setOnClickListener(new OnClickListener() {
 
@@ -100,6 +115,10 @@ public class PuzzleMillionaireActivity extends Activity {
 		});
 	}
 
+    /**
+    * Links button C 
+    * 
+    */
 	private void linkButtonC() {
 		this.buttonC.setOnClickListener(new OnClickListener() {
 
@@ -109,7 +128,11 @@ public class PuzzleMillionaireActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links button D 
+    * 
+    */
 	private void linkButtonD() {
 		this.buttonD.setOnClickListener(new OnClickListener() {
 
@@ -120,6 +143,10 @@ public class PuzzleMillionaireActivity extends Activity {
 		});
 	}
 
+    /**
+    * Links button Help PC 
+    * 
+    */
 	private void linkButtonHelpPC() {
 		this.buttonHelpPC.setOnClickListener(new OnClickListener() {
 
@@ -140,7 +167,11 @@ public class PuzzleMillionaireActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links button Help skip
+    * 
+    */
 	private void linkButtonHelpSkip() {
 		this.buttonHelpSkip.setOnClickListener(new OnClickListener() {
 
@@ -159,7 +190,11 @@ public class PuzzleMillionaireActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links button help public 
+    * 
+    */
 	private void linkButtonHelpPublic() {
 		this.buttonHelpPublic.setOnClickListener(new OnClickListener() {
 
@@ -177,8 +212,14 @@ public class PuzzleMillionaireActivity extends Activity {
 			}
 		});
 	}
-
-
+  
+    /**
+    * Checks if answer is correct 
+    *
+    * @param choice
+    *        the answer to be checked
+    *
+    */
 	private void isCorrectAnswer(int choice) {
 		if (choice==getCorrectAnswer()) {
 			this.makeText("Correct answer");
@@ -199,15 +240,38 @@ public class PuzzleMillionaireActivity extends Activity {
 		}
 	}
 	
+	/**
+    * Sets correct answer 
+    *
+    * @param choice
+    *        set to the correct answer
+    *
+    */
 	private void setCorrectAnswer(Integer choice) {
 		correctAnswer=choice;
 	}
-
+    
+    /**
+    * Gets correct answer
+    *
+    * @return correctAnswer
+    *     the returned correct answer 
+    *
+    */
 	private Integer getCorrectAnswer() {
 		return correctAnswer;
 	}
 
-	
+	/**
+    * Checks for incorrect answer if you used the 50/50 helpline
+    *
+    * @param choice
+    *        the answer to be checked
+    *
+    * @return false
+    *      
+    *
+    */
 	private Boolean incorrectAnswer(int choice) {
 		if (choice==1) 
 			return checkStringEmpty(this.buttonA.getText().toString());
@@ -220,17 +284,39 @@ public class PuzzleMillionaireActivity extends Activity {
 		return false;
 	}
 	
+	/**
+    * Checks if string is empty 
+    *
+    * @param string
+    *     the checked string parameter
+    *
+    * @return false
+    *
+    */
 	private Boolean checkStringEmpty(String string) {
 		if (string=="")
 			return true;
 		return false;
 	}
 	
+	/**
+    * Makes toaster text 
+    *
+    * @param text
+    *     the text to be checked
+    *
+    */
 	private void makeText(String text) {
 		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 	}
 	
-
+    /**
+    * Used by the 50/50 helpline when he disables 2 buttons
+    *
+    * @param choice
+    *     the answer to be disabled
+    *
+    */
 	private void helpPC(int choice) {
 			if (choice==1)
 				this.buttonA.setText("");
@@ -242,7 +328,6 @@ public class PuzzleMillionaireActivity extends Activity {
 				this.buttonD.setText("");						
 		}
 	
-
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -256,7 +341,10 @@ public class PuzzleMillionaireActivity extends Activity {
 		this.setupNewQuestion();
 	}
 
-	
+	/**
+    * Initializes the questions for the game and the answers, as well as the correct answers 
+    *
+    */
 	private void initQuestions() {
 		String[] temp=	{"Who was the first president in the USA?", "What are Belgians good at?", "What country excels at making French Fries?", "Who was the world cup winner in 2014 in Soccer?", "Who did Mario rescue from the castle in all of his games?"};
 		this.questions=temp;
@@ -266,11 +354,19 @@ public class PuzzleMillionaireActivity extends Activity {
 		this.correctAnswers= temp3;
 	}
 	
+	/**
+    * Initializes the question counter and your current score counter 
+    *
+    */
 	private void initCounters() {
 		this.scoreCounter=0;
 		this.questionCounter=0;		
 	}
 	
+	/**
+    * Sets up new question
+    *
+    */
 	private void setupNewQuestion() {
 		this.score.setText(scoreCounter.toString()+" / "+ questionCounter.toString());
 		Integer choice = this.questionCounter;
@@ -289,6 +385,10 @@ public class PuzzleMillionaireActivity extends Activity {
 		this.buttonD.setText(this.answers[choice][3]);	
 	}
 	
+	/**
+    * Ends game after 5 questions
+    *
+    */
 	private void endGame(){
 		if (this.scoreCounter>3) {		
 			this.setResult(RESULT_OK);
@@ -299,7 +399,16 @@ public class PuzzleMillionaireActivity extends Activity {
 		this.finish();
 	}
 	
-	
+	/**
+    * Gets random number  
+    *
+    * @param range
+    *     from 0 to range the number to be get
+    *
+    * @return rand.nextInt(range);
+    *     returned random number
+    *
+    */
 	private Integer getRandomNumber(int range)
 	{
 		Random rand = new Random();
