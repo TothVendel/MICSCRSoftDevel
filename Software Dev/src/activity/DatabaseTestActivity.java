@@ -26,7 +26,11 @@ public class DatabaseTestActivity extends Activity {
 	private EditText edit_text;
 	private Button button_save;
 	private Button button_map;
-	
+
+	/**
+    * Initializes UI Fields
+    * 
+    */
 	private void initUIFields() {
 		this.edit_text = (EditText) this.findViewById(R.id.editText1);
 		this.button_save = (Button) this.findViewById(R.id.button1);
@@ -34,11 +38,19 @@ public class DatabaseTestActivity extends Activity {
 
 	}
 	
+	/**
+    * Links Navigation Buttons
+    * 
+    */
 	private void linkNavigationButtons() {
 		this.linkSaveButton();
 		this.linkMapButton();
 	}
 	
+    /**
+    * Links Save Button
+    * 
+    */
 	private void linkSaveButton() {
 		this.button_save.setOnClickListener(new OnClickListener() {
 
@@ -53,7 +65,11 @@ public class DatabaseTestActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links Map Button
+    * 
+    */
 	private void linkMapButton() {
 		this.button_map.setOnClickListener(new OnClickListener() {
 
@@ -97,14 +113,26 @@ public class DatabaseTestActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+    /**
+    * Makes toaster text
+    * 
+    */
 	private void makeText(String text) {
 		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 	}
 	
+	/**
+    * Closes database
+    * 
+    */
 	private void closeDatabase() {
 		dataSource.close();
 	}
 	
+	/**
+    * Opens and loads database
+    * 
+    */
 	private void loadDatabase() {
 		dataSource = new SQLiteNumberPointsDataSource(this);
 
