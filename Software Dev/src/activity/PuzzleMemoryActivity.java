@@ -42,7 +42,11 @@ public class PuzzleMemoryActivity extends Activity {
 	private int turns;
 	private TableLayout mtable;
 	private UpdateCardsHandler handler;
-
+    
+   	/**
+    * Loads images
+    * 
+    */
 	private void loadImages() {
     	images = new ArrayList<Drawable>();
     	
@@ -53,6 +57,10 @@ public class PuzzleMemoryActivity extends Activity {
     	}	
 	}
 	
+	/**
+    * Initializes UI Fields 
+    * 
+    */
 	private void initUIFields() {
 	       backImage =  getResources().getDrawable(R.drawable.icon);	       
 	       buttonListener = new ButtonListener();
@@ -73,6 +81,10 @@ public class PuzzleMemoryActivity extends Activity {
         setupNewGame();
     }
     
+    /**
+    * Sets up new game
+    * 
+    */
     private void setupNewGame() {
 			int x,y;
 			Random r = new Random();
@@ -85,6 +97,16 @@ public class PuzzleMemoryActivity extends Activity {
 			
     }
     
+    /**
+    * Creates new game
+    *
+    * @param c
+    * 	initializes column parameter
+    *
+    * @param r
+    * 	initializes parameter
+    *
+    */
     private void newGame(int c, int r) {
     	row = r;
     	col = c;
@@ -112,6 +134,10 @@ public class PuzzleMemoryActivity extends Activity {
     	 ((TextView)findViewById(R.id.tv1)).setText("Tries: "+turns);
 	}
     
+    /**
+    * Loads cards 
+    * 
+    */
 	private void loadCards(){
 		try{
 	    	int size = row*col;
@@ -148,6 +174,15 @@ public class PuzzleMemoryActivity extends Activity {
 		
     }
     
+    /**
+    * Creates row
+    *
+    * @param y
+    * 	 the y position
+    * @return row
+    *     the row to be returned
+    *
+    */
     private TableRow createRow(int y){
     	 TableRow row = new TableRow(context);
     	 row.setHorizontalGravity(Gravity.CENTER);
@@ -158,6 +193,19 @@ public class PuzzleMemoryActivity extends Activity {
          return row;
     }
     
+    /**
+    * Creates image button
+    *
+    * @param x
+    *	 the x position
+    *
+    * @param y
+    * 	 the y position
+    * 	 
+    * @return button
+    *     the button to be returned
+    *
+    */
     private View createImageButton(int x, int y){
     	Button button = new Button(context);
     	button.setBackgroundDrawable(backImage);
@@ -182,7 +230,20 @@ public class PuzzleMemoryActivity extends Activity {
 			}
 			
 		}
-
+        
+        /**
+        * Turns card
+        *
+        * @param button
+        *	 the button type
+        *
+        * @param x
+        *	 the x position
+        *
+        * @param y
+        * 	 the y position
+   	    *
+    	*/
 		private void turnCard(Button button,int x, int y) {
 			button.setBackgroundDrawable(images.get(cards[x][y]));
 			
@@ -225,6 +286,10 @@ public class PuzzleMemoryActivity extends Activity {
 			
 		}
     
+    /**
+    * Ends game 
+    * 
+    */
 	private void endGame(){
 		if (this.turns<(cardsCounter*2)) {		
 			this.setResult(RESULT_OK);
@@ -235,6 +300,10 @@ public class PuzzleMemoryActivity extends Activity {
 		this.finish();
 	}
 
+    /**
+    * Checks whether game is over 
+    * 
+    */
     private void checkEndgame() {
     	if (cardsCounter==currentCardsCounter) {
     		endGame();			
@@ -250,7 +319,11 @@ public class PuzzleMemoryActivity extends Activity {
     			checkCards();
     		}
     	}
-  	
+  	    
+  	    /**
+    	* Checks cards 
+    	* 
+    	*/
     	public void checkCards(){
     	    	if(cards[second.getX()][second.getY()] == cards[first.getX()][first.getY()]){
     				first.getButton().setVisibility(View.INVISIBLE);
