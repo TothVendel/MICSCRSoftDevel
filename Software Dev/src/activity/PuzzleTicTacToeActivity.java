@@ -31,10 +31,21 @@ class AnimatedButton {
 	    }
 	};
 	
+	/**
+    * Gets image button 
+    *
+    * @return this.button
+    *      returns the image button 
+    *
+    */
 	public ImageButton getImageButton() {
 		return this.button;
 	}
 	
+	/**
+    * Sets images for the buttons
+    *
+    */
 	private void setImage( ) {
 		if((turn % 2) == 0) {
 			switch(stage) {
@@ -122,7 +133,11 @@ public class PuzzleTicTacToeActivity extends Activity {
 		COMPUTER_WON,
 		CAT
 	}
-		
+	
+	/**
+    * Setup the game
+    *
+    */	
 	private void setupGame( ) {
 		cells = new Cell [9];
 		
@@ -131,6 +146,22 @@ public class PuzzleTicTacToeActivity extends Activity {
 		}
 	}
 	
+	/**
+    * Checks if you have three same x or o's in a row
+    *
+    * @param c1
+    *            cell 
+    *
+    * @param c2
+    *            cell
+    *
+    * @param c3
+    *            cell
+    *
+    * @param value
+    *            checked value
+    *
+    */
 	private boolean checkTriple(int c1, int c2, int c3, Cell value) {
 		if((cells[c1] == cells[c2]) && (cells[c2] == cells[c3]) && (cells[c3] == value))
 			return true;
@@ -138,6 +169,10 @@ public class PuzzleTicTacToeActivity extends Activity {
 			return false;
 	}
 	
+	/**
+    * Checks game for possible three same x or o's in a row
+    *
+    */
 	private Outcome checkGame( ) {
 
 		if(checkTriple(0, 1, 2, Cell.X)) return Outcome.P1_WON;
@@ -192,7 +227,19 @@ public class PuzzleTicTacToeActivity extends Activity {
 			return Outcome.NONE;
 	}
 	
-
+    /**
+    * Checks whether can win
+    *
+    * @param index
+    *            index
+    *
+    * @param player
+    *            player
+    *
+    * @return can
+    		return whether can win(true or false)
+    *
+    */
 	private boolean canWin(int index, Cell player) {
 		
 		Cell old = cells[index];
@@ -211,6 +258,16 @@ public class PuzzleTicTacToeActivity extends Activity {
 		return can;
 	}
 	
+	/**
+    * Ranks move for AI
+    *
+    * @param index
+    *            the rank number 
+    *
+    * @return 5
+    		returns the rank 5
+    *
+    */
 	private int rankMove(int index) {
 
 		if(cells[index] != Cell.OPEN)
@@ -232,6 +289,10 @@ public class PuzzleTicTacToeActivity extends Activity {
 		
 	}
 	
+	/**
+    * Ai implementation
+    *
+    */
 	private void doAi( ) {
 		int rankings [] = new int[9];
 
@@ -250,6 +311,15 @@ public class PuzzleTicTacToeActivity extends Activity {
 		buttons[best_ranking].getImageButton().performClick( );
 	}
 
+    /**
+    * Updates the game and handles end-game possibilities
+    *
+    * @param cell
+    *            cell 
+    *
+    * @param turn
+    *            turn
+    */
 	public void update(int cell, int turn) {
 
 		cells[cell] = ((turn % 2) == 0) ? Cell.X : Cell.O;
@@ -281,9 +351,18 @@ public class PuzzleTicTacToeActivity extends Activity {
 		if((num_players == 1) && ((turn % 2) == 0) && (o == Outcome.NONE))
 			doAi( );
 	}
+	
+	/**
+    * Gets status
+    *
+    * @return this.status
+    *      returns the current status
+    *
+    */
 	public TextView getStatus() {
 		return this.status;
 	}
+    
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
