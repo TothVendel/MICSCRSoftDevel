@@ -16,12 +16,19 @@ public class InfoActivity extends Activity {
 	private TextView info;
 	private int numberHints;
 	
+	/**
+    * Initializes UI Fields 
+    *
+    */
 	private void initUIFields() {
 		this.buttonBack = (Button) this.findViewById(R.id.button1);
 		this.info = (TextView) this.findViewById(R.id.textView1);
 	}
 	
-	
+	/**
+    * Links the back button
+    *
+    */
 	private void linkBackButton() {
 		this.buttonBack.setOnClickListener(new OnClickListener() {
 
@@ -33,7 +40,10 @@ public class InfoActivity extends Activity {
 			});
 		}
 
-	
+	/**
+    * Links navigation buttons
+    *
+    */
 	private void linkNavigationButtons() {
 		this.linkBackButton();
 	}
@@ -52,6 +62,10 @@ public class InfoActivity extends Activity {
 		this.makeInfoText();
 	}
 	
+	/**
+    * Makes info text about the place you have to visit
+    *
+    */
 	void makeInfoText() {
 		if (numberHints==0) {
 			setText("The University of Luxembourg is the only university in Luxembourg, founded on 13 August 2003. Prior to that, there were several higher educational institutions such as the cour universitaire or the IST that offered one or two years of academic studies. Luxembourgish students had to go abroad in order to complete their studies at a university (usually to Belgium, France, Germany, Austria, and the United Kingdom). The new university makes it possible for these students to complete their studies in their own country, as well as attract foreign academic interest to Luxembourg. Campus Kirchberg is one of the campuses of the university.");
@@ -82,7 +96,13 @@ public class InfoActivity extends Activity {
 		}
 
 	}
-
+    
+    /**
+    * Sets text to be displayed on the textview
+    *
+    * @param s
+    * 	the text to be set
+    */
 	void setText(String s) {
 		this.info.setText(s);
 	}
