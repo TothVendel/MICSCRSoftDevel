@@ -47,10 +47,24 @@ public class HintsActivity extends Activity {
 		this.linkNavigationButtons();
 	}
 	
+	/**
+    * Sets answer for the question
+    *
+    */
 	private void setAnswer (String answer) {
 		this.answer=answer;
 	}
-
+    
+    /**
+    * Sets final question 
+    *
+    * @param answer
+    * 	 the string question to be set
+    *
+    * @param hints
+    * 	 number of hints
+    *
+    */
 	private void setQuestion (String answer, int hints) {
 		String questionToShow="";
 		if (hints>0 && hints<7) {
@@ -68,11 +82,19 @@ public class HintsActivity extends Activity {
 		this.question.setTextColor(Color.rgb(hints*20, hints*30, hints*10));
 	}
 	
+	/**
+    * Links navigation buttons
+    *
+    */
 	private void linkNavigationButtons() {
 		this.linkButtonExit();
 		this.linkButtonSubmit();
 	}
 	
+	/**
+    * Links exit button
+    *
+    */
 	private void linkButtonExit() {
 		this.buttonExit.setOnClickListener(new OnClickListener() {
 
@@ -82,7 +104,11 @@ public class HintsActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Links submit button
+    *
+    */
 	private void linkButtonSubmit() {
 		this.buttonSubmit.setOnClickListener(new OnClickListener() {
 
@@ -100,7 +126,14 @@ public class HintsActivity extends Activity {
 			}
 		});
 	}
-
+    
+    /**
+    * Ends the activity after clicking on submit
+    *
+    * @param answer
+    * 	 if answer is correct or not 
+    *
+    */
 	private void endGame(Boolean answer){
 		if (answer==true) {		
 			this.setResult(RESULT_OK);
@@ -110,7 +143,11 @@ public class HintsActivity extends Activity {
 		}
 		this.finish();
 	}
-		
+	
+	/**
+    * Initializes UI Fields
+    *
+    */	
 	private void initUIFields() {
 		this.buttonExit = (Button) this.findViewById(R.id.button2);
 		this.buttonSubmit = (Button) this.findViewById(R.id.button1);
@@ -118,7 +155,6 @@ public class HintsActivity extends Activity {
 		this.edit_text = (EditText) this.findViewById(R.id.editText1);
 	}
 	
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -142,11 +178,25 @@ public class HintsActivity extends Activity {
 		return this.questionProgress;
 	}
 	*/
+	
+	/**
+    * Sets the progress of a question
+    *
+    * @param progress
+    * 	 current progress
+    *
+    * @param numberOfHints
+    * 	 current number of hints 
+    */
 	private void setQuestionProgress(String progress, int numberOfHints) {
 		this.questionProgress=progress;
 		this.numberOfHints = numberOfHints;
 	}
 	
+	/**
+    * Loads database
+    *
+    */
 	private void loadDatabase() {
 		dataSource = new SQLiteNumberPointsDataSource(this);
 		final AsyncTask<Void, Void, Boolean> worker = new AsyncTask<Void, Void, Boolean>() {
@@ -189,7 +239,11 @@ public class HintsActivity extends Activity {
 		
 		worker.execute();
 	}
-
+    
+    /**
+    * Makes toaster text
+    *
+    */
 	private void makeText(String text) {
 		Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 	}
