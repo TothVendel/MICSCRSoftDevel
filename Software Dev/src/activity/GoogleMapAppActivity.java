@@ -51,6 +51,10 @@ public class GoogleMapAppActivity extends Activity {
 	private int positionCounter = 0;
 	private Polyline line;
 	
+	/**
+    * Initializes UI Fields
+    * 
+    */
 	private void initUIFields() {
 		this.buttonPuzzle1 = (Button) this.findViewById(R.id.button2);
 		this.buttonShowHints = (Button) this.findViewById(R.id.button1);
@@ -58,13 +62,21 @@ public class GoogleMapAppActivity extends Activity {
 		this.hint1 = (TextView) this.findViewById(R.id.textView2);
 		this.hint3 = (TextView) this.findViewById(R.id.textView3);
 	}
-
+    
+    /**
+    * Initializes first marker location and the textviews' colors
+    * 
+    */
 	private void initFirstMarkerLocation() {
 		this.hint1.setTextColor(Color.RED);
 		this.hint3.setTextColor(Color.BLUE);
         this.hint3.setText("Location : "+ this.positionsName[this.positionCounter]);
 	}
 	
+	/**
+    * Links puzzle button; dependant on how many hints you discovered calls the appropriate game to be played
+    * 
+    */
 	private void linkPuzzleButton() {
 		this.buttonPuzzle1.setOnClickListener(new OnClickListener() {
 
@@ -108,7 +120,10 @@ public class GoogleMapAppActivity extends Activity {
 		});
 	}
 	
-	
+	/**
+    * Links info button about the place
+    * 
+    */
 	private void linkInfoButton() {
 		this.buttonInfo.setOnClickListener(new OnClickListener() {
 
@@ -123,14 +138,20 @@ public class GoogleMapAppActivity extends Activity {
 			});
 		}
 
-	
+	/**
+    * Links navigation buttons
+    * 
+    */
 	private void linkNavigationButtons() {
 		this.linkPuzzleButton();
 		this.linkShowHintsButton();
 		this.linkInfoButton();
 	}
 
-
+    /**
+    * Links show hints button
+    * 
+    */
 	private void linkShowHintsButton() {
 		this.buttonShowHints.setOnClickListener(new OnClickListener() {
 
@@ -142,7 +163,15 @@ public class GoogleMapAppActivity extends Activity {
 		});
 	}
 
-	
+    /**
+    * Saves to database
+    * 
+    * @param text
+    * 	the text to be saved 
+    *
+    * @param position
+    * 	the score to be saved
+    */
 	private void saveToDatabase(String text, int position) {
 		dataSource.open();
 		dataSource.createNumberPoints(text, position);
@@ -150,7 +179,11 @@ public class GoogleMapAppActivity extends Activity {
 		dataSource.close();
 
 	}
-
+    
+    /**
+    * Retrieves the number of hints from the database
+    * 
+    */
 	private void calculateNumberOfHints() {
 		final AsyncTask<Void, Void, Boolean> worker = new AsyncTask<Void, Void, Boolean>() {
 
@@ -180,11 +213,28 @@ public class GoogleMapAppActivity extends Activity {
 
 	}
 	
+	/**
+    * Increments number of hints
+    * 
+    */
 	private void numberOfHintsIncrement() {
 		this.numberOfHints++;
 		this.hint1.setText(this.numberOfHints.toString());
 	}
 	
+	 /**
+     * On Activity result (from a puzzle or from the answer to the final question)
+     *
+     * @param requestCode
+     * 	  the requested code 
+     *
+     * @param resultCode
+     * 	  the result code 
+     * 
+     * @param data
+     *
+     * 
+     */
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 if (requestCode == PuzzleMillionaireActivity.KEY_PUZZLE0_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE1_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE2_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE3_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE4_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE5_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE6_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE7_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE8_INT || requestCode == PuzzleMillionaireActivity.KEY_PUZZLE9_INT) {
              if (resultCode == RESULT_OK) {
@@ -224,12 +274,21 @@ public class GoogleMapAppActivity extends Activity {
          
          
 	 }
-
+        /**
+        * Makes text
+        *
+        * @param text
+        * 	  the text to be made
+        * 
+        */
 		private void makeText(String text) {
 			Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
 		}
 	
-	
+	/**
+    * Initializes Google Maps and your location, sets the markers, calls myLocationChangeListener
+    *
+    */
     private void initGoogleMap() {
         map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
                 .getMap();    	
@@ -246,10 +305,26 @@ public class GoogleMapAppActivity extends Activity {
         this.map.setOnMyLocationChangeListener(this.myLocationChangeListener);
         }
     
+    /**
+    * Enables my location
+    *
+    */
     private void enableMyLocation() {
     	this.map.setMyLocationEnabled(true);
     }
     
+    /**
+    * Checks if two points (your location and the marker you have to go to) are close enough for you to have arrived 
+    *
+    * @param a
+    * 	  LatLng point a
+    *
+    * @param b
+    * 	  LatLng point b 
+    * 
+    * @return false
+    *
+    */
     private Boolean arrivedTwoPoints(LatLng a, LatLng b) {
     	double lat = Math.abs(a.latitude-b.latitude);
     	double longi = Math.abs(a.longitude-b.longitude);
@@ -264,7 +339,12 @@ public class GoogleMapAppActivity extends Activity {
     	return false;
     }
     
-    
+    /**
+    * Gets my location
+    *
+    * @return new LatLng(me.getLatitude(), me.getLongitude())
+    * 		the position you are at, or (0,0) if it failed to get it
+    */
     private LatLng getMyLocation() {
     	Location me = this.map.getMyLocation();
     	if (me == null) {
@@ -278,7 +358,10 @@ public class GoogleMapAppActivity extends Activity {
     	return new LatLng(me.getLatitude(), me.getLongitude());
     }
     
-    
+    /**
+    *	Updates your position if you have moved; and checks if you have arrived on destination 
+    *
+    */
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
         @Override
         public void onMyLocationChange(Location location) {
@@ -298,6 +381,10 @@ public class GoogleMapAppActivity extends Activity {
         }
     };
     
+    /**
+    * Verifies if you have arrived to the marker you are supposed to go
+    *
+    */
     private void verifyLocation() {
     	if (this.currentMarker == null) {
     		Log.e("Current marker", "null");
@@ -326,11 +413,27 @@ public class GoogleMapAppActivity extends Activity {
     	} 	
     }
     
+    /**
+    * Removes the line (route) from your location to the marker you have to go
+    *
+    */
     private void removeRoute() {
     	if (line!=null)
     		line.remove();
     }
     
+    /**
+    * Adds line (route) from your location to the marker you have to go
+    *
+    * @param a
+    * 	  LatLng point a
+    *
+    * @param b
+    * 	  LatLng point b 
+    * 
+    * @return line
+    *
+    */
     private Polyline addRoute(LatLng a, LatLng b) {
     line = map.addPolyline(new PolylineOptions().add(a, b).geodesic(true));
     line.setColor(Color.GRAY);
@@ -338,11 +441,36 @@ public class GoogleMapAppActivity extends Activity {
     return line;
     }
     
+    /**
+    * Adds new marker
+    *
+    * @param Latitude
+    * 	  the new latitude coordinate
+    *
+    * @param Longitude
+    * 	  the new longitude coordinate
+    * 
+    * @param title
+    * 	  the title of the marker
+    * 
+    * @return map.addMarker(new MarkerOptions().position(latLng).title(title))
+    *
+    */
     private Marker addNewMarker(double Latitude, double Longitude, String title) {
         LatLng latLng = new LatLng(Latitude, Longitude);
         return map.addMarker(new MarkerOptions().position(latLng).title(title));
     }
     
+    /**
+    * Moves the camera to the position specified by parameters
+    *
+    * @param Latitude
+    * 	  latitude coordinate
+    *
+    * @param Longitude
+    * 	  Longitude coordinate
+    *
+    */
     private void moveCameraToMarker(double Latitude, double Longitude)
     {
         LatLng latLng = new LatLng(Latitude, Longitude);
@@ -365,12 +493,20 @@ public class GoogleMapAppActivity extends Activity {
 		//this.verifyLocation();
 		
     }
-
+    
+    /**
+    * Initializes database
+    *
+    */
 	private void initDatabase () {
 		dataSource = new SQLiteNumberPointsDataSource(this);
 		this.initPositionCounter();
 	}
 	
+    /**
+    * Initializes how many hints you have discovered from the database and saves it to positionCounter
+    *
+    */
 	private void initPositionCounter() {
 		dataSource.open();
 		List<NumberPoints> elements = dataSource.getAllNumberPoints();
@@ -378,15 +514,21 @@ public class GoogleMapAppActivity extends Activity {
 		this.positionCounter = elements.size();
 	}
 	
-	
+	/**
+    * Disables puzzle button
+    *
+    */
 	private void disablePuzzleButton() {
 		this.buttonPuzzle1.setEnabled(false);
 	}
 	
+	/**
+    * Enables puzzle button
+    *
+    */
 	private void enablePuzzleButton() {
 		this.buttonPuzzle1.setEnabled(true);
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
