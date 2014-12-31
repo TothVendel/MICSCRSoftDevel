@@ -214,7 +214,7 @@ public class GoogleMapAppActivity extends Activity {
 	}
 	
 	/**
-    * Increments number of hints
+    * Increments number of hints and displays it on the screen
     * 
     */
 	private void numberOfHintsIncrement() {
@@ -488,10 +488,7 @@ public class GoogleMapAppActivity extends Activity {
 		this.initFirstMarkerLocation();
 		this.linkNavigationButtons();	
 		this.calculateNumberOfHints();
-		this.disablePuzzleButton();
-        
-		//this.verifyLocation();
-		
+		this.disablePuzzleButton();		
     }
     
     /**
@@ -504,8 +501,8 @@ public class GoogleMapAppActivity extends Activity {
 	}
 	
     /**
-    * Initializes how many hints you have discovered from the database and saves it to positionCounter
-    *
+    * Initializes how many hints you have discovered from the database and saves it to positionCounter for the Google maps next marker
+    * (Doesn't do it in a background worker because google maps has to initialize anyway and it needs to know the progress.)
     */
 	private void initPositionCounter() {
 		dataSource.open();
