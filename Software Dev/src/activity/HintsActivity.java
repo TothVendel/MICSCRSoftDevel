@@ -183,10 +183,10 @@ public class HintsActivity extends Activity {
     * Sets the progress of a question
     *
     * @param progress
-    * 	 current progress
+    * 	 current progress of the question
     *
     * @param numberOfHints
-    * 	 current number of hints 
+    * 	 current number of hints discovered
     */
 	private void setQuestionProgress(String progress, int numberOfHints) {
 		this.questionProgress=progress;
@@ -205,8 +205,9 @@ public class HintsActivity extends Activity {
 			protected Boolean doInBackground(final Void... arg0) {
 				dataSource.open();
 				List<NumberPoints> values = dataSource.getAllNumberPoints();
-				//HintsActivity.this.setQuestionProgress(values.);
 
+				//Copying the words (hints) from the database to a string to show it in the textview.
+				//Number of hints is the number of entries in the database because each entry corresponds to a hint for a puzzle solved
 				String content = "";
 				for (int i = 0; i<values.size(); i++) {					
 					NumberPoints temp = values.get(i);					
